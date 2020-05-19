@@ -1,0 +1,22 @@
+{
+  "name": "tribal-lbd-full",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "ask-sdk-core": "^2.8.0",
+    "ask-sdk-model": "^1.28.0"
+  },
+  "config": {
+    "lambda_endpoint": "arn:aws:lambda:us-east-2:415890424219:function:ask-tribal-ask-demo-default-ski-AlexaSkillFunction-EPUBRBM5DHIH"
+  },
+  "devDependencies": {
+    "bespoken-tools": "^2.4.65"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "bst proxy lambda lambda/index.js"
+  },
+  "author": "",
+  "license": "ISC"
+}

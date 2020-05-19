@@ -1,0 +1,266 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "lbd helper",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "AddNewTopicIntent",
+          "slots": [
+            {
+              "name": "sltTime",
+              "type": "AMAZON.DATE"
+            },
+            {
+              "name": "sltAuthor",
+              "type": "author"
+            },
+            {
+              "name": "sltTopic",
+              "type": "topic"
+            }
+          ],
+          "samples": [
+            "Add a new topic",
+            "add a new learning by doing topic",
+            "I want to add a new learning by doing topic",
+            "I want to add a new topic",
+            "I want to add a new lbd session",
+            "add a new lbd session",
+            "add a new lbd topic called",
+            "add a new lbd topic called {sltTopic} by {sltAuthor} {sltTime}",
+            "add a new lbd topic called {sltTopic} by {sltAuthor} {sltTime}",
+            "add a new topic called {sltTopic} by {sltAuthor} {sltTime}",
+            "I want to add a new topic called {sltTopic} by {sltAuthor} {sltTime}",
+            "I want to add a new topic {sltTopic} by {sltAuthor} {sltTime}"
+          ]
+        }
+      ],
+      "types": [
+        {
+          "name": "author",
+          "values": [
+            {
+              "name": {
+                "value": "Lalit",
+                "synonyms": ["chill boy"]
+              }
+            },
+            {
+              "name": {
+                "value": "Anthony"
+              }
+            },
+            {
+              "name": {
+                "value": "Leire"
+              }
+            },
+            {
+              "name": {
+                "value": "Serguey",
+                "synonyms": ["sooga"]
+              }
+            },
+            {
+              "name": {
+                "value": "Pratik"
+              }
+            },
+            {
+              "name": {
+                "value": "Vaibhav"
+              }
+            },
+            {
+              "name": {
+                "value": "Alice"
+              }
+            }
+          ]
+        },
+        {
+          "name": "topic",
+          "values": [
+            {
+              "name": {
+                "value": "flutter"
+              }
+            },
+            {
+              "name": {
+                "value": "testing"
+              }
+            },
+            {
+              "name": {
+                "value": "front end react"
+              }
+            },
+            {
+              "name": {
+                "value": "react for dummies"
+              }
+            },
+            {
+              "name": {
+                "value": "how to create a blog post"
+              }
+            },
+            {
+              "name": {
+                "value": "front end testing frameworks"
+              }
+            },
+            {
+              "name": {
+                "value": "flutter"
+              }
+            },
+            {
+              "name": {
+                "value": "node starter"
+              }
+            },
+            {
+              "name": {
+                "value": "node starter"
+              }
+            },
+            {
+              "name": {
+                "value": "css grid and flex box basics"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "dialog": {
+      "delegationStrategy": "ALWAYS",
+      "intents": [
+        {
+          "name": "AddNewTopicIntent",
+          "confirmationRequired": true,
+          "prompts": {
+            "confirmation": "Confirmation.Intent-AddNewTopicIntent"
+          },
+          "slots": [
+            {
+              "name": "sltTime",
+              "type": "AMAZON.DATE",
+              "confirmationRequired": false,
+              "elicitationRequired": true,
+              "prompts": {
+                "elicitation": "Elicitation.Intent-AddNewTopicIntent.IntentSlot-sltTime"
+              }
+            },
+            {
+              "name": "sltAuthor",
+              "type": "author",
+              "confirmationRequired": false,
+              "elicitationRequired": true,
+              "prompts": {
+                "elicitation": "Elicitation.Intent-AddNewTopicIntent.IntentSlot-sltAuthor"
+              },
+              "validations": [
+                {
+                  "type": "hasEntityResolutionMatch",
+                  "prompt": "Slot.Validation.0.Intent-AddNewTopicIntent.IntentSlot-sltAuthor"
+                }
+              ]
+            },
+            {
+              "name": "sltTopic",
+              "type": "topic",
+              "confirmationRequired": false,
+              "elicitationRequired": true,
+              "prompts": {
+                "elicitation": "Elicitation.Intent-AddNewTopicIntent.IntentSlot-sltTopic"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "prompts": [
+      {
+        "id": "Confirmation.Intent-AddNewTopicIntent",
+        "variations": [
+          {
+            "type": "SSML",
+            "value": "<speak>Are you sure you want to add a new session topic called {sltTopic}<break time='200ms'/> led by {sltAuthor}<break time='200ms'/> {sltTime}?</speak>"
+          }
+        ]
+      },
+      {
+        "id": "Elicitation.Intent-AddNewTopicIntent.IntentSlot-sltTime",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "When would this topic happen?"
+          },
+          {
+            "type": "SSML",
+            "value": "<speak>When do you want to schedule this topic?<break time='200ms'/> LBD usually happens on Tuesdays at one thirty</speak>"
+          }
+        ]
+      },
+      {
+        "id": "Elicitation.Intent-AddNewTopicIntent.IntentSlot-sltTopic",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "What is the name of the lbd topic?"
+          }
+        ]
+      },
+      {
+        "id": "Elicitation.Intent-AddNewTopicIntent.IntentSlot-sltAuthor",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "Who will be leading this session?"
+          },
+          {
+            "type": "SSML",
+            "value": "<speak>Who will be leading this session?<break time='200ms'/> You can say tbd as a placeholder</speak>"
+          }
+        ]
+      },
+      {
+        "id": "Slot.Validation.0.Intent-AddNewTopicIntent.IntentSlot-sltAuthor",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "Unfortunately {sltAuthor} does not work at TribalScale, please chooose a tribalscale employee to lead the session"
+          }
+        ]
+      },
+      {
+        "id": "Slot.Validation.0.Intent-AddNewTopicIntent.IntentSlot-sltTopic",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "I did not catch the name of the lbd topic, what is the topic?"
+          }
+        ]
+      }
+    ]
+  }
+}
